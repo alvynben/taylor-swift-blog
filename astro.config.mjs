@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	// Set your production URL (required for RSS, sitemap, canonical URLs).
-	site: 'https://example.com',
+	// Production URL (RSS, sitemap, canonical URLs, Open Graph).
+	site: 'https://boyfriendguidetotaylorswift.com',
 	integrations: [mdx(), sitemap()],
 });

@@ -16,8 +16,8 @@ backend:
 #   name: github
 #   repo: your-github-username/taylor-swift-blog
 #   branch: main
-#   base_url: https://your-production-domain.com
-#   auth_endpoint: https://your-production-domain.com/.netlify/functions/auth
+#   base_url: https://boyfriendguidetotaylorswift.com
+#   auth_endpoint: https://boyfriendguidetotaylorswift.com/.netlify/functions/auth
 
 # For local editing with `npx decap-server`, add: local_backend: true
 

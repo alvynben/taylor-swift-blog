@@ -25,9 +25,9 @@ backend:
   repo: alynben/taylor-swift-blog
   branch: main
   auth_scope: repo # lets Decap commit; use public_repo if the repo is only public and you prefer
-  # Required when the admin UI is served from Vercel (not Netlify):
-  base_url: https://boyfriendguidetotaylorswift.com
-  auth_endpoint: https://api.netlify.com/auth
+  # OAuth popup must hit Netlify's API. auth_endpoint is a path appended to base_url (never a full URL).
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
 media_folder: public/images/blog
 public_folder: /images/blog

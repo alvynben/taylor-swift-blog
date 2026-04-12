@@ -39,7 +39,7 @@ GitHub does not allow “pure browser” OAuth for CMS writes; Decap uses **[Net
    - Open the site → **Site configuration** → **Access & security** → **OAuth** → **Install provider** → **GitHub** → paste Client ID and Secret → Save.  
    - Same steps as Netlify’s doc: [OAuth provider tokens](https://docs.netlify.com/manage/security/secure-access-to-sites/oauth-provider-tokens/).
 
-3. **This repo** — In `public/admin/config.yml`, set `backend.repo` to `your-github-username/your-repo` (the repo Vercel deploys). The file already sets `base_url` to your domain and `auth_endpoint: https://api.netlify.com/auth`.
+3. **This repo** — In `public/admin/config.yml`, set `backend.repo` to `your-github-username/your-repo` (the repo Vercel deploys). OAuth must use **`base_url: https://api.netlify.com`** and **`auth_endpoint: auth`** (path only). Using your Vercel domain as `base_url` makes Decap open `/auth` on your site and you get a Vercel **404**.
 
 4. **Deploy** — Commit and push; wait for Vercel. Open `/admin`, use **Login with GitHub**. The GitHub user must be able to **push** to the content repo.
 

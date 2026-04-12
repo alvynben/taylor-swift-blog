@@ -10,10 +10,14 @@
 #
 # 2) Netlify (free account; you do NOT need to host the site there):
 #    - Create any site if prompted (e.g. import the same GitHub repo once), then open that site.
+#    - Site configuration → General → Site details → Site URL → set to the SAME URL where you
+#      open /admin (e.g. https://boyfriendguidetotaylorswift.com). If Site URL is still the
+#      default *.netlify.app while you use /admin on your Vercel custom domain, GitHub auth can
+#      succeed but the popup never hands the token back — the CMS stays on the login screen.
+#      See: https://github.com/netlify/netlify-cms/issues/1890#issuecomment-459387565
 #    - Site configuration → Access & security → OAuth → Install provider → GitHub
 #    - Paste the GitHub Client ID and Client Secret and save.
-#    - Copy that site’s default Netlify hostname (e.g. amazing-cms-123.netlify.app) from
-#      Domain management → your-site-name.netlify.app → set site_domain below to match EXACTLY.
+#    - Copy that site’s *.netlify.app hostname from Domain management → set site_domain below.
 #      If site_domain is wrong, https://api.netlify.com/auth returns “Not Found”.
 #    Docs: https://docs.netlify.com/manage/security/secure-access-to-sites/oauth-provider-tokens/
 #

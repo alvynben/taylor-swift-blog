@@ -32,7 +32,7 @@ backend:
   base_url: https://api.netlify.com
   auth_endpoint: auth
   # Must be the Netlify site hostname where GitHub OAuth is installed (not your Vercel/custom domain).
-  site_domain: your-site-name.netlify.app
+  site_domain: chimerical-scone-f89175.netlify.app
 
 media_folder: public/images/blog
 public_folder: /images/blog

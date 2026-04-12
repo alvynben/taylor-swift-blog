@@ -3,7 +3,7 @@
 	<rect width="32" height="32" rx="8" fill="url(#g)" opacity="0.35" />
 	<!--
 	  One line, one size: TS ♥ gf ♥ bf (gf/bf = girlfriend/boyfriend; full words on og.png).
-	  Nudge font-size if the string clips on your browser (try 6.25 or tighten spaces).
+	  If it still clips, try 5.25 or remove spaces: TS♥gf♥bf.
 	-->
 	<text
 		x="16"
@@ -11,7 +11,7 @@
 		text-anchor="middle"
 		dominant-baseline="central"
 		font-family="Georgia, 'Times New Roman', serif"
-		font-size="6.5"
+		font-size="5.5"
 		font-weight="600"
 		fill="#9f1239"
 	>TS ♥ gf ♥ bf</text>

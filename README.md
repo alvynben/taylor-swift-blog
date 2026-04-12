@@ -43,7 +43,7 @@ GitHub does not allow “pure browser” OAuth for CMS writes; Decap uses **[Net
 
 4. **Deploy** — Commit and push; wait for Vercel. Open `/admin`, use **Login with GitHub**. The GitHub user must be able to **push** to the content repo.
 
-5. **Troubleshooting** — Popup errors often mean the callback URL on the GitHub OAuth app is not exactly `https://api.netlify.com/auth/done`, or the Client ID/Secret is not saved under **OAuth** on the Netlify site you use.
+5. **Troubleshooting** — Popup errors often mean the callback URL on the GitHub OAuth app is not exactly `https://api.netlify.com/auth/done`, or the Client ID/Secret is not saved under **OAuth** on the Netlify site you use. If the CMS says **Failed to load config.yml (404)**, you were probably on `/admin` without a trailing slash; the repo uses `<base href="/admin/">` plus a Vercel redirect `/admin` → `/admin/` so `/admin/config.yml` always loads.
 
 More context: [Decap GitHub backend](https://decapcms.org/docs/github-backend/).
 

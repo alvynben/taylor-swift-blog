@@ -4,6 +4,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="robots" content="noindex, nofollow" />
+		<!-- Decap loads config.yml with a relative URL; without this, /admin (no slash) resolves config to /config.yml and 404s. -->
+		<base href="/admin/" />
 		<title>Content Manager — Boyfriend&apos;s Guide</title>
 	</head>
 	<body>

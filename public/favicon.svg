@@ -2,26 +2,26 @@
 	<rect width="32" height="32" rx="8" fill="#faf6f1" />
 	<rect width="32" height="32" rx="8" fill="url(#g)" opacity="0.35" />
 	<!--
-	  Stacked for 32×32: couple emoji (tiny) + T ♪ S (initials + note).
-	  If the tab icon looks muddy on a non-Retina screen, remove the first <text> or shorten to "TS".
+	  Tab icons are tiny: full "girlfriend" / "boyfriend" won’t fit. This uses gf / bf.
+	  Open Graph (og.png) has the full phrase. Hearts are ♥ (U+2665) so they render without emoji fonts.
 	-->
 	<text
 		x="16"
-		y="11"
-		text-anchor="middle"
-		font-size="8"
-		font-family="system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif"
-	>💑</text>
-	<text
-		x="16"
-		y="23.5"
+		y="13.5"
 		text-anchor="middle"
 		font-family="Georgia, 'Times New Roman', serif"
-		font-size="10"
+		font-size="12"
 		font-weight="700"
 		fill="#9f1239"
-		letter-spacing="0.02em"
-	>T ♪ S</text>
+	>TS</text>
+	<text
+		x="16"
+		y="22.5"
+		text-anchor="middle"
+		font-family="Georgia, 'Times New Roman', serif"
+		font-size="6.25"
+		fill="#881337"
+	>♥ gf ♥ bf</text>
 	<defs>
 		<linearGradient id="g" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
 			<stop stop-color="#fda4af" />

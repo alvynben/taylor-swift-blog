@@ -1,0 +1,32 @@
+---
+const today = new Date();
+---
+
+<footer>
+	<p class="footer__tagline">Not a fan blog — just someone learning Taylor Swift lore one song at a time.</p>
+	<p class="footer__copy">&copy; {today.getFullYear()} Boyfriend&apos;s Guide. Built with <a href="https://astro.build">Astro</a>.</p>
+</footer>
+<style>
+	footer {
+		padding: 2.5em 1.25em 3em;
+		margin-top: 2rem;
+		background: linear-gradient(180deg, transparent, rgba(var(--gray-light), 0.35));
+		color: rgb(var(--gray));
+		text-align: center;
+		font-size: 0.95rem;
+	}
+
+	.footer__tagline {
+		margin: 0 auto 0.75rem;
+		max-width: 28rem;
+		line-height: 1.5;
+	}
+
+	.footer__copy {
+		margin: 0;
+	}
+
+	footer a {
+		color: var(--accent);
+	}
+</style>

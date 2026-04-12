@@ -1,0 +1,50 @@
+# Decap CMS — https://decapcms.org/docs/
+#
+# Before this works in production:
+# 1. Replace `your-github-username/taylor-swift-blog` with your real GitHub repo.
+# 2. Follow Decap's GitHub backend auth steps (OAuth app + optional Netlify OAuth proxy).
+#    See README.md in this project and: https://decapcms.org/docs/github-backend/
+
+backend:
+  name: github
+  repo: your-github-username/taylor-swift-blog
+  branch: main
+
+# Optional: use Netlify's free OAuth proxy for GitHub (works even if the site is on Vercel).
+# Uncomment and set your production site URL after you deploy:
+# backend:
+#   name: github
+#   repo: your-github-username/taylor-swift-blog
+#   branch: main
+#   base_url: https://your-production-domain.com
+#   auth_endpoint: https://your-production-domain.com/.netlify/functions/auth
+
+# For local editing with `npx decap-server`, add: local_backend: true
+
+media_folder: public/images/blog
+public_folder: /images/blog
+
+collections:
+  - name: blog
+    label: Blog posts
+    folder: src/content/blog
+    create: true
+    slug: '{{filenameSlug}}'
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: URL slug (filename)
+        name: filenameSlug
+        widget: string
+        hint: 'Lowercase-with-dashes, e.g. my-new-post (becomes my-new-post.md)'
+      - { label: Description, name: description, widget: text }
+      - label: Publish date
+        name: pubDate
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        picker_utc: false
+      - { label: Category, name: category, widget: string, required: false }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }

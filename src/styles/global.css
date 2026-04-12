@@ -1,0 +1,199 @@
+/*
+  Warm, readable blog styling — inspired by cozy personal sites.
+ */
+
+@font-face {
+	font-family: 'Atkinson Hyperlegible';
+	src: url('../assets/fonts/atkinson-regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Atkinson Hyperlegible';
+	src: url('../assets/fonts/atkinson-bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--accent: #9f1239;
+	--accent-soft: #fda4af;
+	--accent-dark: #881337;
+	--cream: #faf6f1;
+	--cream-dark: #f0e6d8;
+	--ink: 45, 38, 33;
+	--muted: 110, 95, 85;
+	--black: var(--ink);
+	--gray: var(--muted);
+	--gray-light: 235, 228, 218;
+	--gray-dark: var(--ink);
+	--gray-gradient: rgba(var(--gray-light), 0.65), var(--cream);
+	--box-shadow:
+		0 2px 8px rgba(var(--ink), 0.06),
+		0 12px 32px rgba(var(--ink), 0.08);
+	--font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+}
+
+body {
+	font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	background: var(--cream);
+	background-image:
+		radial-gradient(ellipse 120% 80% at 50% -20%, rgba(253, 164, 175, 0.25), transparent),
+		linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 420px);
+	background-repeat: no-repeat;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	color: rgb(var(--gray-dark));
+	font-size: 1.125rem;
+	line-height: 1.75;
+}
+
+main {
+	width: 720px;
+	max-width: calc(100% - 2em);
+	margin: auto;
+	padding: 2.5em 1em 3em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0 0 0.5rem 0;
+	color: rgb(var(--black));
+	line-height: 1.2;
+	font-family: var(--font-display);
+	font-weight: 600;
+}
+
+h1 {
+	font-size: 2.75rem;
+	letter-spacing: -0.02em;
+}
+
+h2 {
+	font-size: 2rem;
+}
+
+h3 {
+	font-size: 1.5rem;
+}
+
+h4 {
+	font-size: 1.25rem;
+}
+
+h5 {
+	font-size: 1.1rem;
+}
+
+strong,
+b {
+	font-weight: 700;
+}
+
+a {
+	color: var(--accent);
+	text-decoration-color: var(--accent-soft);
+	text-underline-offset: 3px;
+}
+
+a:hover {
+	color: var(--accent-dark);
+}
+
+p {
+	margin-bottom: 1em;
+}
+
+.prose p {
+	margin-bottom: 1.25em;
+}
+
+textarea {
+	width: 100%;
+	font-size: 16px;
+}
+
+input {
+	font-size: 16px;
+}
+
+table {
+	width: 100%;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 10px;
+}
+
+code {
+	padding: 0.15em 0.4em;
+	background-color: rgba(var(--gray-light), 0.9);
+	border-radius: 4px;
+	font-size: 0.9em;
+}
+
+pre {
+	padding: 1.25em;
+	border-radius: 10px;
+	background: rgb(40, 36, 33);
+	color: #f5f0e8;
+	overflow-x: auto;
+}
+
+pre > code {
+	all: unset;
+	font-size: 0.9em;
+}
+
+blockquote {
+	border-left: 4px solid var(--accent-soft);
+	padding: 0 0 0 1.25rem;
+	margin: 0 0 1.5rem 0;
+	font-size: 1.15em;
+	font-style: italic;
+	color: rgb(var(--muted));
+}
+
+hr {
+	border: none;
+	border-top: 1px solid rgba(var(--gray-light), 1);
+}
+
+@media (max-width: 720px) {
+	body {
+		font-size: 1.05rem;
+	}
+
+	main {
+		padding: 1.25em 1em 2em;
+	}
+
+	h1 {
+		font-size: 2.1rem;
+	}
+}
+
+.sr-only {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

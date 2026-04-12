@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import PostCard from '../../components/PostCard.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { isVisiblePost, sortByDateDesc } from '../../utils/posts';
+
+const posts = (await getCollection('blog')).filter(isVisiblePost).sort(sortByDateDesc);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Blog — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			.page-intro {
+				text-align: center;
+				max-width: 36rem;
+				margin: 0 auto 2.5rem;
+			}
+
+			.page-intro h1 {
+				margin-bottom: 0.5rem;
+			}
+
+			.page-intro p {
+				margin: 0;
+				color: rgb(var(--muted));
+				font-size: 1.05rem;
+			}
+
+			.grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1.5rem;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			@media (max-width: 720px) {
+				.grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-intro">
+				<h1>All posts</h1>
+				<p>Song breakdowns, relationship insights, and notes from the deep end of the Swiftiverse.</p>
+			</div>
+			<ul class="grid">
+				{
+					posts.map((post, i) => (
+						<li>
+							<PostCard post={post} featured={i === 0} />
+						</li>
+					))
+				}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>

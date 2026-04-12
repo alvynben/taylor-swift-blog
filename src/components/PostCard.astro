@@ -1,0 +1,122 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+	featured?: boolean;
+}
+
+const { post, featured = false } = Astro.props;
+const { title, description, pubDate, heroImage, category } = post.data;
+---
+
+<article class:list={['post-card', { featured }]}>
+	<a href={`/blog/${post.slug}/`} class="post-card__link">
+		{
+			heroImage && (
+				<div class="post-card__image">
+					<Image width={720} height={360} src={heroImage} alt="" />
+				</div>
+			)
+		}
+		<div class="post-card__body">
+			{
+				category && (
+					<span class="post-card__category">{category}</span>
+				)
+			}
+			<h2 class="post-card__title">{title}</h2>
+			<p class="post-card__date">
+				<FormattedDate date={pubDate} />
+			</p>
+			<p class="post-card__desc">{description}</p>
+		</div>
+	</a>
+</article>
+
+<style>
+	.post-card {
+		margin: 0;
+		border-radius: 16px;
+		background: #fff;
+		box-shadow: var(--box-shadow);
+		overflow: hidden;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.post-card:hover {
+		transform: translateY(-3px);
+		box-shadow:
+			0 4px 16px rgba(var(--ink), 0.08),
+			0 16px 40px rgba(var(--ink), 0.1);
+	}
+
+	.post-card.featured {
+		grid-column: 1 / -1;
+	}
+
+	.post-card__link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+		height: 100%;
+	}
+
+	.post-card__image {
+		aspect-ratio: 2 / 1;
+		overflow: hidden;
+	}
+
+	.post-card__image :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 0;
+		margin: 0;
+	}
+
+	.post-card__body {
+		padding: 1.25rem 1.35rem 1.5rem;
+	}
+
+	.post-card__category {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--accent);
+		margin-bottom: 0.35rem;
+	}
+
+	.post-card__title {
+		font-size: 1.35rem;
+		margin: 0 0 0.35rem 0;
+		line-height: 1.25;
+	}
+
+	.post-card.featured .post-card__title {
+		font-size: clamp(1.5rem, 4vw, 2rem);
+	}
+
+	.post-card__date {
+		margin: 0 0 0.65rem 0;
+		font-size: 0.9rem;
+		color: rgb(var(--gray));
+	}
+
+	.post-card__desc {
+		margin: 0;
+		font-size: 0.98rem;
+		line-height: 1.55;
+		color: rgb(var(--muted));
+	}
+
+	.post-card:hover .post-card__title {
+		color: var(--accent);
+	}
+</style>

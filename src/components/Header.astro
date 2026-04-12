@@ -1,0 +1,87 @@
+---
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header>
+	<nav>
+		<h2 class="brand">
+			<a href="/"><span class="brand__emoji" aria-hidden="true">💭</span> {SITE_TITLE}</a>
+		</h2>
+		<div class="internal-links">
+			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/blog">All posts</HeaderLink>
+			<HeaderLink href="/about">About</HeaderLink>
+		</div>
+	</nav>
+</header>
+<style>
+	header {
+		margin: 0;
+		padding: 0 1.25rem;
+		background: rgba(255, 255, 255, 0.85);
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid rgba(var(--gray-light), 0.9);
+		position: sticky;
+		top: 0;
+		z-index: 10;
+	}
+
+	.brand {
+		margin: 0;
+		font-size: 1rem;
+		font-family: var(--font-display);
+		font-weight: 600;
+	}
+
+	.brand__emoji {
+		margin-right: 0.25rem;
+	}
+
+	h2 a,
+	h2 a.active {
+		text-decoration: none;
+		color: rgb(var(--ink));
+	}
+
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		max-width: 960px;
+		margin: 0 auto;
+		min-height: 3.5rem;
+	}
+
+	nav a {
+		padding: 0.85em 0.5em;
+		color: rgb(var(--ink));
+		border-bottom: 3px solid transparent;
+		text-decoration: none;
+		font-size: 0.95rem;
+	}
+
+	nav a.active {
+		border-bottom-color: var(--accent);
+	}
+
+	.internal-links {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+	}
+
+	@media (max-width: 640px) {
+		nav {
+			flex-direction: column;
+			align-items: flex-start;
+			padding: 0.5rem 0;
+		}
+
+		.internal-links {
+			width: 100%;
+			justify-content: flex-start;
+		}
+	}
+</style>

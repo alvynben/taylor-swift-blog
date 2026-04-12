@@ -1,0 +1,144 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import PostCard from '../components/PostCard.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { isVisiblePost, sortByDateDesc } from '../utils/posts';
+
+const posts = (await getCollection('blog')).filter(isVisiblePost).sort(sortByDateDesc);
+const [latest, ...rest] = posts;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.hero {
+				text-align: center;
+				padding: 2rem 0 2.5rem;
+				max-width: 40rem;
+				margin: 0 auto;
+			}
+
+			.hero__eyebrow {
+				font-size: 0.9rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: var(--accent);
+				margin: 0 0 0.75rem;
+			}
+
+			.hero h1 {
+				margin: 0 0 1rem;
+				font-size: clamp(2rem, 5vw, 2.85rem);
+			}
+
+			.hero p {
+				margin: 0 0 1.25rem;
+				color: rgb(var(--muted));
+				font-size: 1.1rem;
+				line-height: 1.65;
+			}
+
+			.hero__links {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.75rem 1.25rem;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.hero__links a {
+				font-weight: 600;
+			}
+
+			.section-title {
+				font-size: 1.35rem;
+				margin: 0 0 1.25rem;
+				padding-top: 0.5rem;
+				border-top: 1px solid rgba(var(--gray-light), 1);
+			}
+
+			.grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1.5rem;
+				list-style: none;
+				margin: 0 0 2rem;
+				padding: 0;
+			}
+
+			@media (max-width: 720px) {
+				.grid {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			.more {
+				text-align: center;
+				margin-bottom: 2rem;
+			}
+
+			.more a {
+				font-weight: 600;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="hero" aria-labelledby="site-heading">
+				<p class="hero__eyebrow">Howdy y&apos;all</p>
+				<h1 id="site-heading">Boyfriend&apos;s Guide To Taylor Swift</h1>
+				<p>
+					A space to store the small details I&apos;m learning about my girlfriend&apos;s first love. If
+					you&apos;re another confused-but-curious partner trying to make your favourite swiftie a little
+					happier — pull up a chair.
+				</p>
+				<div class="hero__links">
+					{
+						latest && (
+							<>
+								<a href={`/blog/${latest.slug}/`}>Latest post — {latest.data.title}</a>
+								<span class="muted-sep" aria-hidden="true">·</span>
+							</>
+						)
+					}
+					<a href="/blog/">Browse all posts</a>
+				</div>
+			</section>
+
+			{
+				latest && (
+					<>
+						<h2 class="section-title">Latest</h2>
+						<ul class="grid">
+							<li style="grid-column: 1 / -1;">
+								<PostCard post={latest} featured />
+							</li>
+							{
+								rest.slice(0, 4).map((post) => (
+									<li>
+										<PostCard post={post} />
+									</li>
+								))
+							}
+						</ul>
+						{
+							rest.length > 4 && (
+								<p class="more">
+									<a href="/blog/">See everything on the blog →</a>
+								</p>
+							)
+						}
+					</>
+				)
+			}
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -21,7 +21,9 @@
 #      If site_domain is wrong, https://api.netlify.com/auth returns “Not Found”.
 #    Docs: https://docs.netlify.com/manage/security/secure-access-to-sites/oauth-provider-tokens/
 #
-# 3) Set backend.repo below to your GitHub owner/repo (same repo Vercel deploys from).
+# 3) Set backend.repo below to EXACTLY owner/repo from the repo URL (same one Vercel builds).
+#    If Decap says “repo not found”: wrong spelling, private repo + wrong GitHub login, or (for
+#    org-owned repos) the org must approve the OAuth app under Org → Settings → Third-party access.
 #
 # 4) Commit, push, wait for Vercel deploy, then open /admin and “Login with GitHub”.
 #

@@ -1,9 +1,15 @@
 ---
 const today = new Date();
+const rssUrl = new URL('rss.xml', Astro.site);
 ---
 
 <footer>
 	<p class="footer__tagline">Not a fan blog — just someone learning Taylor Swift lore one song at a time.</p>
+	<p class="footer__links">
+		<a href={rssUrl.pathname} type="application/rss+xml">RSS feed</a>
+		<span class="footer__sep" aria-hidden="true">·</span>
+		<a href="/blog/">All posts</a>
+	</p>
 	<p class="footer__copy">&copy; {today.getFullYear()} Boyfriend&apos;s Guide. Built with <a href="https://astro.build">Astro</a>.</p>
 </footer>
 <style>
@@ -22,11 +28,32 @@ const today = new Date();
 		line-height: 1.5;
 	}
 
+	.footer__links {
+		margin: 0 0 0.85rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 0.65rem;
+		justify-content: center;
+		align-items: center;
+		font-weight: 600;
+	}
+
+	.footer__sep {
+		color: rgba(var(--muted), 0.6);
+		font-weight: 400;
+	}
+
 	.footer__copy {
 		margin: 0;
+		font-weight: 400;
 	}
 
 	footer a {
 		color: var(--accent);
+		text-decoration: none;
+	}
+
+	footer a:hover {
+		text-decoration: underline;
 	}
 </style>

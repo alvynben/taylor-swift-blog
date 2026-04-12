@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build:og": "node scripts/generate-social-images.mjs",
+    "build": "npm run build:og && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },

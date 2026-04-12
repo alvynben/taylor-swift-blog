@@ -8,7 +8,8 @@ Personal blog built with [Astro](https://astro.build/), Markdown content, and [D
 | ----------------- | ------------------------------------------- |
 | `npm install`     | Install dependencies                        |
 | `npm run dev`     | Dev server at `http://localhost:4321`       |
-| `npm run build`   | Production build to `dist/`                 |
+| `npm run build`   | Regenerates `public/og.png` then production build to `dist/` |
+| `npm run build:og` | Regenerate default social image only ([`scripts/generate-social-images.mjs`](scripts/generate-social-images.mjs)) |
 | `npm run preview` | Preview the production build locally          |
 
 ## Project layout
@@ -70,6 +71,24 @@ New posts ask for a **URL slug** (`filenameSlug`); that value becomes the Markdo
 ## Requirements
 
 - Node.js **18.17+**, **20.3+**, or **21+** (see `package.json` `engines`). Astro **4.x** is pinned for broad local compatibility; you can upgrade to Astro 6 on **Node 22.12+** when ready.
+
+## RSS, favicon, and social preview
+
+- **RSS:** [`/rss.xml`](https://boyfriendguidetotaylorswift.com/rss.xml) — also linked in the site footer.
+- **Favicon:** [`public/favicon.svg`](public/favicon.svg) (vector); [`public/favicon.ico`](public/favicon.ico) is legacy—replace or remove if you regenerate a matching `.ico`.
+- **Default share image:** [`public/og.png`](public/og.png) (1200×630) is produced by `npm run build:og` from [`scripts/generate-social-images.mjs`](scripts/generate-social-images.mjs). Edit the SVG string in that script, then run `npm run build:og` (or full `npm run build`). Blog posts with a **hero image** still use that image for Open Graph / Twitter.
+
+## Google Search Console
+
+1. Open [Google Search Console](https://search.google.com/search-console) and add a **URL prefix** property: `https://boyfriendguidetotaylorswift.com`
+2. Choose **HTML tag** verification. Copy only the **content** value from the meta tag Google shows (not the whole tag).
+3. In **Vercel** → your project → **Settings** → **Environment Variables**, add:
+   - Name: `PUBLIC_GOOGLE_SITE_VERIFICATION`
+   - Value: that token  
+   Redeploy so [`BaseHead.astro`](src/components/BaseHead.astro) can emit `<meta name="google-site-verification" content="…" />`.
+4. In Search Console, click **Verify**, then **Sitemaps** → add: `https://boyfriendguidetotaylorswift.com/sitemap-index.xml` (this site’s build outputs [`sitemap-index.xml`](https://boyfriendguidetotaylorswift.com/sitemap-index.xml) at the root).
+
+See [`.env.example`](.env.example) for a local copy of the variable name.
 
 ## Credit
 

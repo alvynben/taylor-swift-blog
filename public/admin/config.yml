@@ -12,6 +12,9 @@
 #    - Create any site if prompted (e.g. import the same GitHub repo once), then open that site.
 #    - Site configuration → Access & security → OAuth → Install provider → GitHub
 #    - Paste the GitHub Client ID and Client Secret and save.
+#    - Copy that site’s default Netlify hostname (e.g. amazing-cms-123.netlify.app) from
+#      Domain management → your-site-name.netlify.app → set site_domain below to match EXACTLY.
+#      If site_domain is wrong, https://api.netlify.com/auth returns “Not Found”.
 #    Docs: https://docs.netlify.com/manage/security/secure-access-to-sites/oauth-provider-tokens/
 #
 # 3) Set backend.repo below to your GitHub owner/repo (same repo Vercel deploys from).
@@ -25,9 +28,11 @@ backend:
   repo: alynben/taylor-swift-blog
   branch: main
   auth_scope: repo # lets Decap commit; use public_repo if the repo is only public and you prefer
-  # OAuth popup must hit Netlify's API. auth_endpoint is a path appended to base_url (never a full URL).
+  # OAuth popup hits Netlify’s API; auth_endpoint is a path appended to base_url (never a full URL).
   base_url: https://api.netlify.com
   auth_endpoint: auth
+  # Must be the Netlify site hostname where GitHub OAuth is installed (not your Vercel/custom domain).
+  site_domain: your-site-name.netlify.app
 
 media_folder: public/images/blog
 public_folder: /images/blog

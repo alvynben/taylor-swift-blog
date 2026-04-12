@@ -37,13 +37,14 @@ GitHub does not allow “pure browser” OAuth for CMS writes; Decap uses **[Net
 2. **Netlify** (free account; you are not moving hosting off Vercel)  
    - If you do not already have a site, add one once (e.g. import the same GitHub repo).  
    - Open the site → **Site configuration** → **Access & security** → **OAuth** → **Install provider** → **GitHub** → paste Client ID and Secret → Save.  
+   - **Important:** In **Domain management**, copy this site’s default **`*.netlify.app`** hostname (e.g. `taylor-swift-blog-abc123.netlify.app`). Set **`site_domain`** in `public/admin/config.yml` to that value exactly. Netlify looks up OAuth by that hostname; if Decap sends your Vercel/custom domain instead, **`https://api.netlify.com/auth` responds with “Not Found”**.  
    - Same steps as Netlify’s doc: [OAuth provider tokens](https://docs.netlify.com/manage/security/secure-access-to-sites/oauth-provider-tokens/).
 
 3. **This repo** — In `public/admin/config.yml`, set `backend.repo` to `your-github-username/your-repo` (the repo Vercel deploys). OAuth must use **`base_url: https://api.netlify.com`** and **`auth_endpoint: auth`** (path only). Using your Vercel domain as `base_url` makes Decap open `/auth` on your site and you get a Vercel **404**.
 
 4. **Deploy** — Commit and push; wait for Vercel. Open `/admin`, use **Login with GitHub**. The GitHub user must be able to **push** to the content repo.
 
-5. **Troubleshooting** — Popup errors often mean the callback URL on the GitHub OAuth app is not exactly `https://api.netlify.com/auth/done`, or the Client ID/Secret is not saved under **OAuth** on the Netlify site you use. If the CMS says **Failed to load config.yml (404)**, you were probably on `/admin` without a trailing slash; the repo uses `<base href="/admin/">` plus a Vercel redirect `/admin` → `/admin/` so `/admin/config.yml` always loads.
+5. **Troubleshooting** — Popup errors often mean the callback URL on the GitHub OAuth app is not exactly `https://api.netlify.com/auth/done`, or the Client ID/Secret is not saved under **OAuth** on the Netlify site you use. **“Not Found” on Login with GitHub** usually means **`site_domain` in `config.yml` is missing or wrong** — it must be your **`something.netlify.app`** hostname from the Netlify site where OAuth is configured, not `boyfriendguidetotaylorswift.com`. If the CMS says **Failed to load config.yml (404)**, you were probably on `/admin` without a trailing slash; the repo uses `<base href="/admin/">` plus a Vercel redirect `/admin` → `/admin/` so `/admin/config.yml` always loads.
 
 More context: [Decap GitHub backend](https://decapcms.org/docs/github-backend/).
 

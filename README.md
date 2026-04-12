@@ -23,11 +23,35 @@ Set the `site` in [`astro.config.mjs`](astro.config.mjs) to your real domain (us
 
 ## Decap CMS (`/admin`)
 
-1. Edit [`public/admin/config.yml`](public/admin/config.yml): set `backend.repo` to `your-username/your-repo` and `branch` to your default branch.
-2. **GitHub authentication** — Follow [Decap’s GitHub backend guide](https://decapcms.org/docs/github-backend/). Common setups:
-   - **Netlify**: enable Identity + Git Gateway, or use Netlify’s OAuth with a GitHub OAuth app.
-   - **Any host**: create a GitHub OAuth app and use Netlify’s [external OAuth client](https://decapcms.org/docs/authentication-backends/#external-oauth-clients) pattern (`auth_endpoint` / `base_url`) so Decap can log in without hosting on Netlify.
-3. **Local editing**: run `npx decap-server` from the repo root and add `local_backend: true` to `config.yml` (remove before merge if you prefer not to commit it).
+Config lives in [`public/admin/config.yml`](public/admin/config.yml). The live admin URL is **`https://boyfriendguidetotaylorswift.com/admin`** (after deploy).
+
+### Vercel + GitHub (recommended for this project)
+
+GitHub does not allow “pure browser” OAuth for CMS writes; Decap uses **[Netlify’s OAuth service](https://docs.netlify.com/manage/security/secure-access-to-sites/oauth-provider-tokens/)** only to complete the GitHub login — your site still runs on **Vercel**.
+
+1. **GitHub OAuth app** — [Developer Settings → OAuth Apps → New](https://github.com/settings/developers)  
+   - **Homepage URL:** `https://boyfriendguidetotaylorswift.com`  
+   - **Authorization callback URL:** `https://api.netlify.com/auth/done`  
+   - Create the app, copy **Client ID**, generate and copy **Client Secret**.
+
+2. **Netlify** (free account; you are not moving hosting off Vercel)  
+   - If you do not already have a site, add one once (e.g. import the same GitHub repo).  
+   - Open the site → **Site configuration** → **Access & security** → **OAuth** → **Install provider** → **GitHub** → paste Client ID and Secret → Save.  
+   - Same steps as Netlify’s doc: [OAuth provider tokens](https://docs.netlify.com/manage/security/secure-access-to-sites/oauth-provider-tokens/).
+
+3. **This repo** — In `public/admin/config.yml`, set `backend.repo` to `your-github-username/your-repo` (the repo Vercel deploys). The file already sets `base_url` to your domain and `auth_endpoint: https://api.netlify.com/auth`.
+
+4. **Deploy** — Commit and push; wait for Vercel. Open `/admin`, use **Login with GitHub**. The GitHub user must be able to **push** to the content repo.
+
+5. **Troubleshooting** — Popup errors often mean the callback URL on the GitHub OAuth app is not exactly `https://api.netlify.com/auth/done`, or the Client ID/Secret is not saved under **OAuth** on the Netlify site you use.
+
+More context: [Decap GitHub backend](https://decapcms.org/docs/github-backend/).
+
+### Local-only editing
+
+From the repo root, add `local_backend: true` under `backend` in `config.yml`, run `npx decap-server`, then open the URL it prints (often `http://localhost:8080/admin`). Remove or set `local_backend: false` when you are done if you do not want that in production config.
+
+### Content notes
 
 Uploaded images from Decap go to **`public/images/blog/`** and are referenced in Markdown as `/images/blog/your-file.jpg`.
 

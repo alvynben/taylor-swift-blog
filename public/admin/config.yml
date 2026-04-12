@@ -1,25 +1,33 @@
-# Decap CMS — https://decapcms.org/docs/
+# Decap CMS — https://decapcms.org/docs/github-backend/
 #
-# Before this works in production:
-# 1. Replace `your-github-username/taylor-swift-blog` with your real GitHub repo.
-# 2. Follow Decap's GitHub backend auth steps (OAuth app + optional Netlify OAuth proxy).
-#    See README.md in this project and: https://decapcms.org/docs/github-backend/
+# === Vercel + GitHub (uses Netlify only as OAuth signer; site stays on Vercel) ===
+#
+# 1) GitHub OAuth app: https://github.com/settings/developers
+#    - Application name: anything (e.g. Decap CMS — boyfriend guide)
+#    - Homepage URL: https://boyfriendguidetotaylorswift.com
+#    - Authorization callback URL: https://api.netlify.com/auth/done
+#    - Save Client ID and generate a Client Secret
+#
+# 2) Netlify (free account; you do NOT need to host the site there):
+#    - Create any site if prompted (e.g. import the same GitHub repo once), then open that site.
+#    - Site configuration → Access & security → OAuth → Install provider → GitHub
+#    - Paste the GitHub Client ID and Client Secret and save.
+#    Docs: https://docs.netlify.com/manage/security/secure-access-to-sites/oauth-provider-tokens/
+#
+# 3) Set backend.repo below to your GitHub owner/repo (same repo Vercel deploys from).
+#
+# 4) Commit, push, wait for Vercel deploy, then open /admin and “Login with GitHub”.
+#
+# Local editing: add `local_backend: true` under backend and run `npx decap-server` (see README).
 
 backend:
   name: github
-  repo: your-github-username/taylor-swift-blog
+  repo: alynben/taylor-swift-blog
   branch: main
-
-# Optional: use Netlify's free OAuth proxy for GitHub (works even if the site is on Vercel).
-# Uncomment and set your production site URL after you deploy:
-# backend:
-#   name: github
-#   repo: your-github-username/taylor-swift-blog
-#   branch: main
-#   base_url: https://boyfriendguidetotaylorswift.com
-#   auth_endpoint: https://boyfriendguidetotaylorswift.com/.netlify/functions/auth
-
-# For local editing with `npx decap-server`, add: local_backend: true
+  auth_scope: repo # lets Decap commit; use public_repo if the repo is only public and you prefer
+  # Required when the admin UI is served from Vercel (not Netlify):
+  base_url: https://boyfriendguidetotaylorswift.com
+  auth_endpoint: https://api.netlify.com/auth
 
 media_folder: public/images/blog
 public_folder: /images/blog

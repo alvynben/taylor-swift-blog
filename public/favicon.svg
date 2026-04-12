@@ -1,20 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
 	<rect width="32" height="32" rx="8" fill="#faf6f1" />
 	<rect width="32" height="32" rx="8" fill="url(#g)" opacity="0.35" />
-	<!--
-	  One line, one size: TS ♥ gf ♥ bf (gf/bf = girlfriend/boyfriend; full words on og.png).
-	  If it still clips, try 5.25 or remove spaces: TS♥gf♥bf.
-	-->
 	<text
 		x="16"
 		y="16"
 		text-anchor="middle"
 		dominant-baseline="central"
 		font-family="Georgia, 'Times New Roman', serif"
-		font-size="5.5"
-		font-weight="600"
+		font-size="13"
+		font-weight="700"
 		fill="#9f1239"
-	>TS ♥ gf ♥ bf</text>
+	>TS</text>
 	<defs>
 		<linearGradient id="g" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
 			<stop stop-color="#fda4af" />

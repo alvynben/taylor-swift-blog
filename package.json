@@ -7,8 +7,9 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "build:favicon": "node scripts/generate-favicon.mjs",
     "build:og": "node scripts/generate-social-images.mjs",
-    "build": "npm run build:og && astro build",
+    "build": "npm run build:favicon && npm run build:og && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -18,5 +19,8 @@
     "@astrojs/sitemap": "3.1.6",
     "astro": "^4.16.18",
     "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "to-ico": "^1.1.5"
   }
 }

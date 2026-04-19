@@ -1,5 +1,6 @@
 /**
- * Builds public/favicon.ico from public/favicon.svg (multi-size PNG → ICO).
+ * Builds public/favicon.ico and public/favicon-96.png from public/favicon.svg.
+ * ICO: multi-size PNGs for legacy tabs; PNG 96×96: Google Search recommends >48px raster.
  * Run: npm run build:favicon
  */
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -20,3 +21,6 @@ const pngBuffers = await Promise.all(
 const ico = await toIco(pngBuffers);
 writeFileSync(join(publicDir, 'favicon.ico'), ico);
 console.log(`Wrote public/favicon.ico (${sizes.join(', ')} px) from favicon.svg`);
+
+await sharp(svg).resize(96, 96).png().toFile(join(publicDir, 'favicon-96.png'));
+console.log('Wrote public/favicon-96.png (96 px) from favicon.svg');
